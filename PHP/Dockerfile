@@ -39,13 +39,14 @@ RUN apt-get install -y \
     php8.2-mbstring \
     php8.2-xml \
     php8.2-curl \
-    php8.2-zip
+    php8.2-zip \
+    php8.2-swoole
 
 # Cài đặt Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --version=2.8.5 --install-dir=/usr/local/bin --filename=composer
 
 # Cấu hình Supervisor
-COPY supervisord/supervisord.conf /etc/supervisord.conf
+COPY supervisord/supervisord.conf /etc/supervisor/supervisord.conf
 COPY supervisord/supervisor.d/ /etc/supervisor/conf.d/
 
 # Thiết lập thư mục log cho Supervisor
@@ -56,4 +57,4 @@ RUN mkdir -p /var/log/supervisor && \
 EXPOSE 80
 
 # Lệnh mặc định khi container được khởi động
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]

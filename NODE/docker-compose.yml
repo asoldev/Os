@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  node_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: node
+    restart: always
